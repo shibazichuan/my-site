@@ -1,9 +1,11 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from app.config import settings
-from app.database import get_redis
-from app.api import auth, posts, admin
+from app.database import get_redis, async_session
+from app.api import auth, posts, admin, tools
+from app.services.shortlink_service import get_shortlink_by_code
 
 
 @asynccontextmanager
@@ -26,6 +28,17 @@ app.add_middleware(
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(posts.router, prefix="/api/posts", tags=["posts"])
 app.include_router(admin.router, prefix="/api/admin", tags=["admin"])
+app.include_router(tools.router, prefix="/api/tools", tags=["tools"])
+
+
+@app.get("/r/{short_code}")
+async def redirect_shortlink(short_code: str):
+    async with async_session() as db:
+        try:
+            link = await get_shortlink_by_code(db, short_code)
+            return RedirectResponse(url=link.original_url, status_code=302)
+        finally:
+            await db.close()
 
 
 @app.get("/api/health")

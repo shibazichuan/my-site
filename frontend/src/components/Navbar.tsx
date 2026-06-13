@@ -9,6 +9,7 @@ export default function Navbar() {
         <div className="flex items-center gap-6">
           <Link to="/" className="font-bold text-lg text-gray-900 hover:text-blue-600">YourName</Link>
           <Link to="/blog" className="text-sm text-gray-600 hover:text-gray-900">博客</Link>
+          {isAuthenticated && <Link to="/tools" className="text-sm text-gray-600 hover:text-gray-900">工具箱</Link>}
         </div>
         <div className="flex items-center gap-4 text-sm">
           {isAuthenticated ? (

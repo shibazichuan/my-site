@@ -18,3 +18,19 @@ export interface PaginatedPosts {
 export interface TokenResponse {
   access_token: string; refresh_token: string; token_type: string; user: User;
 }
+
+// ---- Tools ----
+export interface ShortLinkItem {
+  id: string; short_code: string; short_url: string;
+  original_url: string; click_count: number; created_at: string;
+}
+export interface PaginatedShortLinks {
+  items: ShortLinkItem[]; total: number; page: number; page_size: number;
+}
+export interface ImageRecordItem {
+  id: string; original_name: string; original_size: number;
+  compressed_size: number; url: string; quality: number; created_at: string;
+}
+export interface PaginatedImages {
+  items: ImageRecordItem[]; total: number; page: number; page_size: number;
+}

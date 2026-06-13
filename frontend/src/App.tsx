@@ -5,10 +5,15 @@ import BlogList from './pages/BlogList'
 import BlogDetail from './pages/BlogDetail'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import AdminGuard from './components/AdminGuard'
+import AuthGuard from './components/AdminGuard'
 import AdminLayout from './pages/admin/AdminLayout'
 import PostList from './pages/admin/PostList'
 import PostEditor from './pages/admin/PostEditor'
+import ToolsIndex from './pages/tools/ToolsIndex'
+import ShortLink from './pages/tools/ShortLink'
+import ImageCompress from './pages/tools/ImageCompress'
+import JsonFormatter from './pages/tools/JsonFormatter'
+import Base64Tool from './pages/tools/Base64Tool'
 
 export default function App() {
   return (
@@ -20,12 +25,21 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Route>
-      <Route element={<AdminGuard />}>
+      <Route element={<AuthGuard requireAdmin />}>
         <Route element={<AdminLayout />}>
           <Route path="/admin" element={<PostList />} />
           <Route path="/admin/posts" element={<PostList />} />
           <Route path="/admin/posts/new" element={<PostEditor />} />
           <Route path="/admin/posts/:id/edit" element={<PostEditor />} />
+        </Route>
+      </Route>
+      <Route element={<AuthGuard />}>
+        <Route element={<Layout />}>
+          <Route path="/tools" element={<ToolsIndex />} />
+          <Route path="/tools/shortlink" element={<ShortLink />} />
+          <Route path="/tools/image" element={<ImageCompress />} />
+          <Route path="/tools/json" element={<JsonFormatter />} />
+          <Route path="/tools/base64" element={<Base64Tool />} />
         </Route>
       </Route>
     </Routes>

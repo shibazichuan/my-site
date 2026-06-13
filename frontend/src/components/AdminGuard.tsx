@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 
-export default function AdminGuard() {
+interface Props { requireAdmin?: boolean; }
+
+export default function AuthGuard({ requireAdmin = false }: Props) {
   const { isAuthenticated, isAdmin, fetchUser } = useAuthStore();
   const [checking, setChecking] = useState(true);
 
@@ -13,6 +15,6 @@ export default function AdminGuard() {
 
   if (checking) return <div className="text-center py-20 text-gray-400">验证中...</div>;
   if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (!isAdmin) return <div className="text-center py-20 text-gray-500">403 - 无权限访问</div>;
+  if (requireAdmin && !isAdmin) return <div className="text-center py-20 text-gray-500">403 - 无权限访问</div>;
   return <Outlet />;
 }
