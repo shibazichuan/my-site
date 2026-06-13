@@ -35,6 +35,7 @@ services:
       SECRET_KEY: ${SECRET_KEY}
       UPLOAD_DIR: /app/data/uploads
       CORS_ORIGINS: ${CORS_ORIGINS}
+      PYTHONPATH: /app
     volumes:
       - ./data/uploads:/app/data/uploads
     depends_on:

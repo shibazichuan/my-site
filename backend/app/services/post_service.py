@@ -60,8 +60,12 @@ async def create_post(db: AsyncSession, data: PostCreate, author_id: uuid.UUID) 
     post.tags = tags
     db.add(post)
     await db.commit()
-    await db.refresh(post)
-    return post
+    await db.refresh(post, attribute_names=["title", "slug", "content", "html", "summary", "cover_image", "status", "published_at", "view_count", "created_at", "updated_at"])
+    # tags and author are already loaded from assignment, re-load via selectinload
+    result = await db.execute(
+        select(Post).where(Post.id == post.id).options(selectinload(Post.tags), selectinload(Post.author))
+    )
+    return result.scalar_one()
 
 
 async def update_post(db: AsyncSession, post_id: uuid.UUID, data: PostUpdate) -> Post:
@@ -88,8 +92,11 @@ async def update_post(db: AsyncSession, post_id: uuid.UUID, data: PostUpdate) ->
         post.tags = await get_or_create_tags(db, data.tags)
 
     await db.commit()
-    await db.refresh(post)
-    return post
+    # Re-fetch with relationships loaded to avoid lazy-load issues
+    result = await db.execute(
+        select(Post).where(Post.id == post_id).options(selectinload(Post.tags), selectinload(Post.author))
+    )
+    return result.scalar_one()
 
 
 async def delete_post(db: AsyncSession, post_id: uuid.UUID) -> None:
