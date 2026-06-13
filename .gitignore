@@ -9,6 +9,7 @@ __pycache__/
 .mypy_cache/
 data/postgres/
 data/redis/
+data/umami-db/
 data/uploads/*
 !data/uploads/.gitkeep
 .superpowers/

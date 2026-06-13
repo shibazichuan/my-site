@@ -6,11 +6,17 @@ from app.config import settings
 from app.database import get_redis, async_session
 from app.api import auth, posts, admin, tools
 from app.services.shortlink_service import get_shortlink_by_code
+from app.tasks.sitemap import generate_sitemap
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await get_redis()
+    # Generate initial sitemap on startup
+    try:
+        await generate_sitemap({})
+    except Exception:
+        pass
     yield
 
 
