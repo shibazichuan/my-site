@@ -28,7 +28,9 @@ function TreeNode({ name, value, depth }: TreeNodeProps) {
     );
   }
 
-  const entries = isObject ? Object.entries(value as Record<string, unknown>) : (value as unknown[]).map((v, i) => [String(i), v]);
+  const entries: [string, unknown][] = isObject
+    ? Object.entries(value as Record<string, unknown>)
+    : (value as unknown[]).map((v, i): [string, unknown] => [String(i), v]);
   const bracket = isObject ? ['{', '}'] : ['[', ']'];
 
   return (
@@ -42,7 +44,7 @@ function TreeNode({ name, value, depth }: TreeNodeProps) {
       {open && (
         <>
           {entries.map(([k, v]) => (
-            <TreeNode key={k} name={k} value={v} depth={depth + 1} />
+            <TreeNode key={k} name={String(k)} value={v} depth={depth + 1} />
           ))}
           <div style={{ paddingLeft: depth * 16 }}>
             <span className="text-gray-400">{bracket[1]}</span>
