@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+__pycache__/
+*.pyc
+.venv/
+data/postgres/
+data/uploads/*
+!data/uploads/.gitkeep
+.superpowers/
