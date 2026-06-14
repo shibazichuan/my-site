@@ -13,6 +13,9 @@ class Settings(BaseSettings):
     deepseek_api_key: str = ""
     deepseek_api_base: str = "https://api.deepseek.com/v1"
     daily_chat_quota: int = 50
+    payjs_mchid: str = ""
+    payjs_key: str = ""
+    credits_per_yuan: int = 10
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 
