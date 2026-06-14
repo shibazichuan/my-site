@@ -15,6 +15,7 @@ import ImageCompress from './pages/tools/ImageCompress'
 import JsonFormatter from './pages/tools/JsonFormatter'
 import Base64Tool from './pages/tools/Base64Tool'
 import ChatPage from './pages/ChatPage'
+import CreditsPage from './pages/CreditsPage'
 import ServicesPage from './pages/ServicesPage'
 
 export default function App() {
@@ -47,6 +48,7 @@ export default function App() {
       </Route>
       <Route element={<AuthGuard />}>
         <Route path="/chat" element={<ChatPage />} />
+        <Route path="/credits" element={<CreditsPage />} />
       </Route>
     </Routes>
   )

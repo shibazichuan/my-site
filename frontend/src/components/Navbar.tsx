@@ -12,6 +12,7 @@ export default function Navbar() {
           <Link to="/services" className="text-sm text-gray-600 hover:text-gray-900">🛠️ 服务</Link>
           {isAuthenticated && <Link to="/tools" className="text-sm text-gray-600 hover:text-gray-900">工具箱</Link>}
           {isAuthenticated && <Link to="/chat" className="text-sm text-gray-600 hover:text-gray-900">🤖 AI 聊天</Link>}
+          {isAuthenticated && <Link to="/credits" className="text-sm text-gray-600 hover:text-gray-900">💰 积分</Link>}
         </div>
         <div className="flex items-center gap-4 text-sm">
           {isAuthenticated ? (

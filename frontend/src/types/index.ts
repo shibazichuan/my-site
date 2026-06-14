@@ -52,3 +52,11 @@ export interface PaginatedConversations {
 export interface QuotaInfo {
   used: number; limit: number; remaining: number;
 }
+
+// ---- Credits ----
+export interface PlanItem {
+  id: string; name: string; amount_cents: number; credits: number;
+}
+export interface CreditTransactionItem {
+  id: string; amount: number; type: string; description: string; created_at: string;
+}
