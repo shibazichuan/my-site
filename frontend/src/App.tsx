@@ -14,6 +14,7 @@ import ShortLink from './pages/tools/ShortLink'
 import ImageCompress from './pages/tools/ImageCompress'
 import JsonFormatter from './pages/tools/JsonFormatter'
 import Base64Tool from './pages/tools/Base64Tool'
+import ChatPage from './pages/ChatPage'
 
 export default function App() {
   return (
@@ -41,6 +42,9 @@ export default function App() {
           <Route path="/tools/json" element={<JsonFormatter />} />
           <Route path="/tools/base64" element={<Base64Tool />} />
         </Route>
+      </Route>
+      <Route element={<AuthGuard />}>
+        <Route path="/chat" element={<ChatPage />} />
       </Route>
     </Routes>
   )
