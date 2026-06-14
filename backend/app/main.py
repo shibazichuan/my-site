@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from app.config import settings
 from app.database import get_redis, async_session
-from app.api import auth, posts, admin, tools
+from app.api import auth, posts, admin, tools, chat
 from app.services.shortlink_service import get_shortlink_by_code
 from app.tasks.sitemap import generate_sitemap
 
@@ -35,6 +35,7 @@ app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
 app.include_router(posts.router, prefix="/api/posts", tags=["posts"])
 app.include_router(admin.router, prefix="/api/admin", tags=["admin"])
 app.include_router(tools.router, prefix="/api/tools", tags=["tools"])
+app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
 
 
 @app.get("/r/{short_code}")
