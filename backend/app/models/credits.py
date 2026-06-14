@@ -22,6 +22,7 @@ class CreditTransaction(Base):
     description: Mapped[str] = mapped_column(String(200), nullable=False)
     payment_id: Mapped[str | None] = mapped_column(String(100), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    user: Mapped["User"] = relationship("User")
 
 
 class PaymentOrder(Base):
@@ -34,3 +35,4 @@ class PaymentOrder(Base):
     gateway: Mapped[str] = mapped_column(String(20), default="payjs")
     gateway_order_id: Mapped[str | None] = mapped_column(String(100), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    user: Mapped["User"] = relationship("User")

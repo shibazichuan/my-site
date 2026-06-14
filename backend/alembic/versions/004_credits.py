@@ -29,7 +29,7 @@ def upgrade() -> None:
         sa.Column("payment_id", sa.String(100), nullable=True),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.func.now()),
     )
-    op.create_index("idx_ct_user", "credit_transactions", ["user_id", "created_at"])
+    op.create_index("idx_credit_transactions_user", "credit_transactions", ["user_id", "created_at"])
     op.create_table("payment_orders",
         sa.Column("id", UUID(as_uuid=True), primary_key=True),
         sa.Column("user_id", UUID(as_uuid=True), sa.ForeignKey("users.id"), nullable=False),
@@ -40,6 +40,7 @@ def upgrade() -> None:
         sa.Column("gateway_order_id", sa.String(100), nullable=True),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.func.now()),
     )
+    op.create_index("idx_payment_orders_user", "payment_orders", ["user_id"])
 
 
 def downgrade() -> None:
