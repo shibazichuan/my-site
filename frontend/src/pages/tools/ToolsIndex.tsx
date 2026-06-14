@@ -5,6 +5,10 @@ const TOOLS = [
   { to: '/tools/image', icon: '🖼️', title: '图片压缩', desc: '上传图片，在线压缩优化体积' },
   { to: '/tools/json', icon: '📋', title: 'JSON 格式化', desc: '格式化/压缩 JSON，树形视图，JSONPath 搜索' },
   { to: '/tools/base64', icon: '🔐', title: 'Base64 编解码', desc: '文本和文件 Base64 编码/解码' },
+  { to: '/tools/regex', icon: '🔍', title: '正则测试器', desc: '在线测试正则表达式，高亮匹配' },
+  { to: '/tools/diff', icon: '📊', title: 'Diff 对比', desc: '文本差异对比，增删改高亮' },
+  { to: '/tools/markdown', icon: '📄', title: 'Markdown 编辑器', desc: '在线编辑，实时预览' },
+  { to: '/tools/jwt', icon: '🔐', title: 'JWT 调试器', desc: '解码 JWT Header/Payload' },
 ];
 
 export default function ToolsIndex() {

@@ -14,6 +14,10 @@ import ShortLink from './pages/tools/ShortLink'
 import ImageCompress from './pages/tools/ImageCompress'
 import JsonFormatter from './pages/tools/JsonFormatter'
 import Base64Tool from './pages/tools/Base64Tool'
+import RegexTester from './pages/tools/RegexTester'
+import DiffTool from './pages/tools/DiffTool'
+import MarkdownEditor from './pages/tools/MarkdownEditor'
+import JwtDebugger from './pages/tools/JwtDebugger'
 import ChatPage from './pages/ChatPage'
 import CreditsPage from './pages/CreditsPage'
 import ServicesPage from './pages/ServicesPage'
@@ -44,6 +48,10 @@ export default function App() {
           <Route path="/tools/image" element={<ImageCompress />} />
           <Route path="/tools/json" element={<JsonFormatter />} />
           <Route path="/tools/base64" element={<Base64Tool />} />
+          <Route path="/tools/regex" element={<RegexTester />} />
+          <Route path="/tools/diff" element={<DiffTool />} />
+          <Route path="/tools/markdown" element={<MarkdownEditor />} />
+          <Route path="/tools/jwt" element={<JwtDebugger />} />
         </Route>
       </Route>
       <Route element={<AuthGuard />}>
