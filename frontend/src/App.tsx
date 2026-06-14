@@ -15,6 +15,7 @@ import ImageCompress from './pages/tools/ImageCompress'
 import JsonFormatter from './pages/tools/JsonFormatter'
 import Base64Tool from './pages/tools/Base64Tool'
 import ChatPage from './pages/ChatPage'
+import ServicesPage from './pages/ServicesPage'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/services/:tab?" element={<ServicesPage />} />
       </Route>
       <Route element={<AuthGuard requireAdmin />}>
         <Route element={<AdminLayout />}>
