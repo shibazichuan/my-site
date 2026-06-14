@@ -10,6 +10,9 @@ class Settings(BaseSettings):
     refresh_token_expire_days: int = 7
     upload_dir: str = "./data/uploads"
     cors_origins: str = "http://localhost"
+    deepseek_api_key: str = ""
+    deepseek_api_base: str = "https://api.deepseek.com/v1"
+    daily_chat_quota: int = 50
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 
