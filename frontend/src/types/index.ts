@@ -34,3 +34,21 @@ export interface ImageRecordItem {
 export interface PaginatedImages {
   items: ImageRecordItem[]; total: number; page: number; page_size: number;
 }
+
+// ---- Chat ----
+export interface ChatMessage {
+  id: string; role: 'user' | 'assistant'; content: string; created_at: string;
+}
+export interface ConversationListItem {
+  id: string; title: string; updated_at: string;
+}
+export interface ConversationDetail {
+  id: string; title: string; messages: ChatMessage[];
+  created_at: string; updated_at: string;
+}
+export interface PaginatedConversations {
+  items: ConversationListItem[]; total: number; page: number; page_size: number;
+}
+export interface QuotaInfo {
+  used: number; limit: number; remaining: number;
+}
