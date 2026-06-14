@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchPosts } from '../api/posts';
 import PostCard from '../components/PostCard';
 import Pagination from '../components/Pagination';
+import SEO from '../components/SEO';
 import type { PostListItem } from '../types';
 
 const ALL_TAGS = [
@@ -36,6 +37,7 @@ export default function BlogList() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      <SEO title="博客" description="技术博客文章 — 前端、后端、工具、AI" />
       <h1 className="text-2xl font-bold text-gray-900 mb-6">📝 博客</h1>
       <div className="flex gap-3 mb-6">
         <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}

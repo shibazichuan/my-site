@@ -1,26 +1,29 @@
+import { lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
-import Home from './pages/Home'
-import BlogList from './pages/BlogList'
-import BlogDetail from './pages/BlogDetail'
-import Login from './pages/Login'
-import Register from './pages/Register'
 import AuthGuard from './components/AdminGuard'
-import AdminLayout from './pages/admin/AdminLayout'
-import PostList from './pages/admin/PostList'
-import PostEditor from './pages/admin/PostEditor'
-import ToolsIndex from './pages/tools/ToolsIndex'
-import ShortLink from './pages/tools/ShortLink'
-import ImageCompress from './pages/tools/ImageCompress'
-import JsonFormatter from './pages/tools/JsonFormatter'
-import Base64Tool from './pages/tools/Base64Tool'
-import RegexTester from './pages/tools/RegexTester'
-import DiffTool from './pages/tools/DiffTool'
-import MarkdownEditor from './pages/tools/MarkdownEditor'
-import JwtDebugger from './pages/tools/JwtDebugger'
-import ChatPage from './pages/ChatPage'
-import CreditsPage from './pages/CreditsPage'
-import ServicesPage from './pages/ServicesPage'
+
+const Home = lazy(() => import('./pages/Home'))
+const BlogList = lazy(() => import('./pages/BlogList'))
+const BlogDetail = lazy(() => import('./pages/BlogDetail'))
+const Login = lazy(() => import('./pages/Login'))
+const Register = lazy(() => import('./pages/Register'))
+const ServicesPage = lazy(() => import('./pages/ServicesPage'))
+const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'))
+const PostList = lazy(() => import('./pages/admin/PostList'))
+const PostEditor = lazy(() => import('./pages/admin/PostEditor'))
+const ToolsIndex = lazy(() => import('./pages/tools/ToolsIndex'))
+const ShortLink = lazy(() => import('./pages/tools/ShortLink'))
+const ImageCompress = lazy(() => import('./pages/tools/ImageCompress'))
+const JsonFormatter = lazy(() => import('./pages/tools/JsonFormatter'))
+const Base64Tool = lazy(() => import('./pages/tools/Base64Tool'))
+const RegexTester = lazy(() => import('./pages/tools/RegexTester'))
+const DiffTool = lazy(() => import('./pages/tools/DiffTool'))
+const MarkdownEditor = lazy(() => import('./pages/tools/MarkdownEditor'))
+const JwtDebugger = lazy(() => import('./pages/tools/JwtDebugger'))
+const ChatPage = lazy(() => import('./pages/ChatPage'))
+const CreditsPage = lazy(() => import('./pages/CreditsPage'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
   return (
@@ -58,6 +61,7 @@ export default function App() {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/credits" element={<CreditsPage />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

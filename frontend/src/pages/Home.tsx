@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchPosts } from '../api/posts';
 import PostCard from '../components/PostCard';
+import SEO from '../components/SEO';
 import type { PostListItem } from '../types';
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
 
   return (
     <div>
+      <SEO title="首页" description="全栈开发者个人网站 — 博客、工具、技术服务" />
       <section className="text-center py-20 px-4 bg-gradient-to-b from-white to-gray-50">
         <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl">👨‍💻</div>
         <h1 className="text-3xl font-bold text-gray-900 mb-3">你好，我是 <span className="text-blue-600">YourName</span></h1>
