@@ -13,4 +13,4 @@ services:
 
   backend:
     environment:
-      CORS_ORIGINS: "https://your-domain.com"
+      CORS_ORIGINS: "https://zhixumentu.com"

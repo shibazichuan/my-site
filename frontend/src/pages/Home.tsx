@@ -14,7 +14,7 @@ export default function Home() {
       <SEO title="首页" description="全栈开发者个人网站 — 博客、工具、技术服务" />
       <section className="text-center py-20 px-4 bg-gradient-to-b from-white to-gray-50">
         <div className="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl">👨‍💻</div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-3">你好，我是 <span className="text-blue-600">YourName</span></h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-3">你好，我是 <span className="text-blue-600">知讯图</span></h1>
         <p className="text-gray-500 max-w-lg mx-auto mb-8 leading-relaxed">全栈开发者，热爱开源。这里记录我的技术实验、分享实用工具，偶尔也写写博客。</p>
         <div className="flex gap-3 justify-center">
           <Link to="/blog" className="bg-blue-600 text-white px-6 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700">📝 读博客</Link>

@@ -1,6 +1,6 @@
 {
-  "name": "YourName - 个人网站",
-  "short_name": "YourName",
+  "name": "知讯图 - 个人网站",
+  "short_name": "知讯图",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

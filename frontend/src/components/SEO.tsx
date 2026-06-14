@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function SEO({ title, description, image, type = 'website' }: Props) {
-  const siteName = 'YourName';
+  const siteName = '知讯图';
   const fullTitle = title ? `${title} — ${siteName}` : siteName;
   const desc = description || '全栈开发者个人网站 — 博客、工具、技术服务';
 

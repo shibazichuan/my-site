@@ -7,7 +7,7 @@ export default function Navbar() {
     <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <Link to="/" className="font-bold text-lg text-gray-900 hover:text-blue-600">YourName</Link>
+          <Link to="/" className="font-bold text-lg text-gray-900 hover:text-blue-600">知讯图</Link>
           <Link to="/blog" className="text-sm text-gray-600 hover:text-gray-900">博客</Link>
           <Link to="/services" className="text-sm text-gray-600 hover:text-gray-900">🛠️ 服务</Link>
           {isAuthenticated && <Link to="/tools" className="text-sm text-gray-600 hover:text-gray-900">工具箱</Link>}
