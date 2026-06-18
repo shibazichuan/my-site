@@ -1,0 +1,25 @@
+# 部署安全加固（在服务器 /opt/my-site 目录执行）
+
+# 1. 拉取最新代码
+cd /opt/my-site && git pull origin master
+
+# 2. 重建并启动（--build 重新构建 backend 镜像安装 slowapi）
+docker compose -f docker-compose.yml -f deploy/docker-compose.prod.yml up -d --build
+
+# 3. 数据库迁移（以防万一）
+docker exec my-site-backend-1 alembic upgrade head
+
+# 4. 验证：检查端口（postgres 和 redis 不应暴露）
+docker ps --format "table {{.Names}}\t{{.Ports}}"
+
+# 5. 验证：检查安全响应头
+curl -sI https://zhixumentu.com | grep -E "Strict-Transport|Content-Security|X-Frame|X-Content|Referrer-Policy"
+
+# 6. 验证：测试速率限制（连续请求6次登录，第6次应返回 429）
+for i in 1 2 3 4 5 6; do
+  echo "--- Request $i ---"
+  curl -s -X POST https://zhixumentu.com/api/auth/login \
+    -H "Content-Type: application/json" \
+    -d '{"email":"test@test.com","password":"wrong"}' | head -c 100
+  echo ""
+done

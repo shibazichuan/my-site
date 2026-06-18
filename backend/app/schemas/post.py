@@ -1,5 +1,5 @@
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class TagResponse(BaseModel):
@@ -51,18 +51,18 @@ class PaginatedPosts(BaseModel):
 
 
 class PostCreate(BaseModel):
-    title: str
-    content: str
-    tags: list[str] = []
-    summary: str | None = None
-    cover_image: str | None = None
-    status: str = "draft"
+    title: str = Field(max_length=200)
+    content: str = Field(max_length=100000)
+    tags: list[str] = Field(default=[], max_items=20)
+    summary: str | None = Field(default=None, max_length=500)
+    cover_image: str | None = Field(default=None, max_length=2048)
+    status: str = Field(default="draft", max_length=20)
 
 
 class PostUpdate(BaseModel):
-    title: str | None = None
-    content: str | None = None
-    tags: list[str] | None = None
-    summary: str | None = None
-    cover_image: str | None = None
-    status: str | None = None
+    title: str | None = Field(default=None, max_length=200)
+    content: str | None = Field(default=None, max_length=100000)
+    tags: list[str] | None = Field(default=None, max_items=20)
+    summary: str | None = Field(default=None, max_length=500)
+    cover_image: str | None = Field(default=None, max_length=2048)
+    status: str | None = Field(default=None, max_length=20)

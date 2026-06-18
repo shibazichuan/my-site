@@ -1,10 +1,10 @@
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 # ---- ShortLink ----
 class ShortLinkCreate(BaseModel):
-    original_url: str
+    original_url: str = Field(max_length=2048)
 
 
 class ShortLinkResponse(BaseModel):

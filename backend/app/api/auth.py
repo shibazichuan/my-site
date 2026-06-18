@@ -9,11 +9,13 @@ from app.services.auth_service import (
 )
 from app.middleware.auth import get_current_user
 from app.models.user import User
+from app.limiter import limiter
 
 router = APIRouter()
 
 
 @router.post("/register", response_model=TokenResponse)
+@limiter.limit("3/hour")
 async def register(data: UserRegister, db: AsyncSession = Depends(get_db)):
     user = await register_user(db, data)
     uid = str(user.id)
@@ -25,6 +27,7 @@ async def register(data: UserRegister, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/login", response_model=TokenResponse)
+@limiter.limit("5/minute")
 async def login(data: UserLogin, db: AsyncSession = Depends(get_db)):
     user = await authenticate_user(db, data.email, data.password)
     uid = str(user.id)
@@ -41,6 +44,7 @@ async def me(user: User = Depends(get_current_user)):
 
 
 @router.post("/refresh")
+@limiter.limit("10/minute")
 async def refresh(data: RefreshRequest):
     payload = decode_token(data.refresh_token)
     if payload.get("type") != "refresh":

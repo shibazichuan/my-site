@@ -5,6 +5,10 @@ from fastapi import UploadFile, HTTPException, status
 from PIL import Image
 from app.config import settings
 
+MAX_UPLOAD_SIZE = 10 * 1024 * 1024  # 10 MB
+ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".ico", ".pdf", ".txt", ".md"}
+ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
+
 
 class LocalStorage:
     def __init__(self, base_dir: str | None = None):
@@ -12,10 +16,31 @@ class LocalStorage:
         os.makedirs(self.base_dir, exist_ok=True)
 
     async def save(self, file: UploadFile) -> str:
-        ext = os.path.splitext(file.filename or "")[1] or ".bin"
+        ext = os.path.splitext(file.filename or "")[1].lower() or ".bin"
+        if ext not in ALLOWED_EXTENSIONS:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"File type '{ext}' not allowed.",
+            )
+
+        # Read in chunks to avoid memory exhaustion on large files
+        chunks = []
+        total_size = 0
+        while True:
+            chunk = await file.read(8192)
+            if not chunk:
+                break
+            total_size += len(chunk)
+            if total_size > MAX_UPLOAD_SIZE:
+                raise HTTPException(
+                    status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                    detail=f"File too large. Maximum size is {MAX_UPLOAD_SIZE // (1024*1024)}MB.",
+                )
+            chunks.append(chunk)
+
+        content = b"".join(chunks)
         filename = f"{uuid.uuid4().hex}{ext}"
         filepath = os.path.join(self.base_dir, filename)
-        content = await file.read()
         with open(filepath, "wb") as f:
             f.write(content)
         return f"/static/{filename}"
@@ -25,12 +50,28 @@ class LocalStorage:
     ) -> dict:
         """Compress and save an image, return metadata dict."""
         ext = os.path.splitext(file.filename or "")[1].lower() or ".jpg"
-        if ext not in (".jpg", ".jpeg", ".png", ".webp"):
+        if ext not in ALLOWED_IMAGE_EXTENSIONS:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="Unsupported image format. Use JPG, PNG, or WebP.",
             )
-        content = await file.read()
+
+        # Read in chunks to avoid memory exhaustion on large files
+        chunks = []
+        total_size = 0
+        while True:
+            chunk = await file.read(8192)
+            if not chunk:
+                break
+            total_size += len(chunk)
+            if total_size > MAX_UPLOAD_SIZE:
+                raise HTTPException(
+                    status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                    detail=f"File too large. Maximum size is {MAX_UPLOAD_SIZE // (1024*1024)}MB.",
+                )
+            chunks.append(chunk)
+
+        content = b"".join(chunks)
         original_size = len(content)
 
         img = Image.open(BytesIO(content))

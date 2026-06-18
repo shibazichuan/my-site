@@ -21,11 +21,13 @@ from app.services.chat_service import (
     conversation_to_list_item,
     conversation_to_detail,
 )
+from app.limiter import limiter
 
 router = APIRouter(dependencies=[Depends(get_current_user)])
 
 
 @router.post("/send")
+@limiter.limit("30/minute")
 async def send_message(
     data: SendMessageRequest,
     user: User = Depends(get_current_user),

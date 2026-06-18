@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Request
 from app.database import async_session
 from app.services.payment_service import handle_payment_notify
+from app.limiter import limiter
 
 router = APIRouter()
 
 @router.post("/notify")
+@limiter.limit("60/minute")
 async def notify(request: Request):
     data = dict(await request.form())
     async with async_session() as db:

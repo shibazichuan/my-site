@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     payjs_mchid: str = ""
     payjs_key: str = ""
     credits_per_yuan: int = 10
+    rate_limit_redis_url: str = ""  # defaults to redis_url if empty
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 

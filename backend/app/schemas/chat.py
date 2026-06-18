@@ -1,10 +1,10 @@
 from datetime import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class SendMessageRequest(BaseModel):
-    conversation_id: str | None = None
-    message: str
+    conversation_id: str | None = Field(default=None, max_length=36)
+    message: str = Field(min_length=1, max_length=10000)
 
 
 class MessageResponse(BaseModel):
