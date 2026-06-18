@@ -34,9 +34,9 @@ export default function BlogDetail() {
 
       <GiscusComment
         repo="shibazichuan/my-site"
-        repoId="R_kg_DOXXXXXXX"
-        category="Announcements"
-        categoryId="DIC_kwDOXXXXXXX"
+        repoId="R_kgDOS6WwZg"
+        category="General"
+        categoryId="DIC_kwDOS6WwZs4C_aR5"
       />
     </article>
   );
