@@ -60,6 +60,12 @@ services:
       UPLOAD_DIR: /app/data/uploads
       CORS_ORIGINS: ${CORS_ORIGINS}
       PYTHONPATH: /app
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY}
+      DEEPSEEK_API_BASE: ${DEEPSEEK_API_BASE:-https://api.deepseek.com/v1}
+      DAILY_CHAT_QUOTA: ${DAILY_CHAT_QUOTA:-50}
+      PAYJS_MCHID: ${PAYJS_MCHID:-}
+      PAYJS_KEY: ${PAYJS_KEY:-}
+      CREDITS_PER_YUAN: ${CREDITS_PER_YUAN:-10}
     volumes:
       - ./data/uploads:/app/data/uploads
     depends_on:
