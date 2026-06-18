@@ -1,1 +1,21 @@
-cd /opt/my-site && git pull origin master && DOCKER_BUILDKIT=0 docker compose -f docker-compose.yml -f deploy/docker-compose.prod.yml up -d --build && docker exec my-site-backend-1 alembic upgrade head
+# 网站监控 — 国内可用方案
+
+## 方案1：阿里云云监控（推荐，已有账号）
+
+1. 登录 https://cloudmonitor.console.aliyun.com
+2. 左侧菜单 → 站点监控 → 创建监控任务
+3. 填：
+   - 监控地址：https://zhixumentu.com
+   - 监控频率：5分钟
+   - 报警通知：手机短信/邮箱
+4. 免费额度够用
+
+## 方案2：BetterStack（国外但国内能访问）
+
+1. 访问 https://betterstack.com
+2. 注册 → Uptime → Create Monitor
+3. URL 填 https://zhixumentu.com
+
+## 方案3：直接用我的 SSH
+
+以后要检查网站，告诉我一声我直接 SSH 上去看 docker ps。
