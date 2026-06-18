@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
@@ -16,7 +16,7 @@ router = APIRouter()
 
 @router.post("/register", response_model=TokenResponse)
 @limiter.limit("3/hour")
-async def register(data: UserRegister, db: AsyncSession = Depends(get_db)):
+async def register(request: Request, data: UserRegister, db: AsyncSession = Depends(get_db)):
     user = await register_user(db, data)
     uid = str(user.id)
     return TokenResponse(
@@ -28,7 +28,7 @@ async def register(data: UserRegister, db: AsyncSession = Depends(get_db)):
 
 @router.post("/login", response_model=TokenResponse)
 @limiter.limit("5/minute")
-async def login(data: UserLogin, db: AsyncSession = Depends(get_db)):
+async def login(request: Request, data: UserLogin, db: AsyncSession = Depends(get_db)):
     user = await authenticate_user(db, data.email, data.password)
     uid = str(user.id)
     return TokenResponse(
@@ -45,7 +45,7 @@ async def me(user: User = Depends(get_current_user)):
 
 @router.post("/refresh")
 @limiter.limit("10/minute")
-async def refresh(data: RefreshRequest):
+async def refresh(request: Request, data: RefreshRequest):
     payload = decode_token(data.refresh_token)
     if payload.get("type") != "refresh":
         raise HTTPException(status_code=401, detail="Invalid token type")

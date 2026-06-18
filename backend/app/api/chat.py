@@ -1,5 +1,5 @@
 import uuid
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, Query, Request
 from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -29,6 +29,7 @@ router = APIRouter(dependencies=[Depends(get_current_user)])
 @router.post("/send")
 @limiter.limit("30/minute")
 async def send_message(
+    request: Request,
     data: SendMessageRequest,
     user: User = Depends(get_current_user),
 ):
