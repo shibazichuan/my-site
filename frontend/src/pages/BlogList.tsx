@@ -38,23 +38,23 @@ export default function BlogList() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <SEO title="博客" description="技术博客文章 — 前端、后端、工具、AI" />
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">📝 博客</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">📝 博客</h1>
       <div className="flex gap-3 mb-6">
         <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && updateParams('search', search)}
-          placeholder="搜索文章..." className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500" />
+          placeholder="搜索文章..." className="flex-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-blue-500" />
         <button onClick={() => updateParams('search', search)} className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">搜索</button>
       </div>
       <div className="flex gap-2 mb-6 flex-wrap">
         <button onClick={() => updateParams('tag', '')}
-          className={`px-3 py-1 rounded-full text-sm ${!tag ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>全部</button>
+          className={`px-3 py-1 rounded-full text-sm ${!tag ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'}`}>全部</button>
         {ALL_TAGS.map((t) => (
           <button key={t.slug} onClick={() => updateParams('tag', t.slug)}
-            className={`px-3 py-1 rounded-full text-sm ${tag === t.slug ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{t.name}</button>
+            className={`px-3 py-1 rounded-full text-sm ${tag === t.slug ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'}`}>{t.name}</button>
         ))}
       </div>
-      {loading ? <div className="text-center py-12 text-gray-400">加载中...</div>
-      : posts.length === 0 ? <div className="text-center py-12 text-gray-400">暂无文章</div>
+      {loading ? <div className="text-center py-12 text-gray-400 dark:text-gray-500">加载中...</div>
+      : posts.length === 0 ? <div className="text-center py-12 text-gray-400 dark:text-gray-500">暂无文章</div>
       : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

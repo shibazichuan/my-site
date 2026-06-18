@@ -7,15 +7,15 @@ export default function Pagination({ page, total, pageSize, onPageChange }: Prop
   return (
     <div className="flex items-center justify-center gap-1 mt-8">
       <button onClick={() => onPageChange(page - 1)} disabled={page <= 1}
-        className="px-3 py-1.5 text-sm rounded border border-gray-200 disabled:opacity-30 hover:bg-gray-50">&laquo;</button>
+        className="px-3 py-1.5 text-sm rounded border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-30 hover:bg-gray-50 dark:hover:bg-gray-800">&laquo;</button>
       {pages.map((p) => (
         <button key={p} onClick={() => onPageChange(p)}
-          className={`px-3 py-1.5 text-sm rounded border ${p === page ? 'bg-blue-600 text-white border-blue-600' : 'border-gray-200 hover:bg-gray-50'}`}>
+          className={`px-3 py-1.5 text-sm rounded border ${p === page ? 'bg-blue-600 text-white border-blue-600' : 'border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
           {p}
         </button>
       ))}
       <button onClick={() => onPageChange(page + 1)} disabled={page >= totalPages}
-        className="px-3 py-1.5 text-sm rounded border border-gray-200 disabled:opacity-30 hover:bg-gray-50">&raquo;</button>
+        className="px-3 py-1.5 text-sm rounded border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-30 hover:bg-gray-50 dark:hover:bg-gray-800">&raquo;</button>
     </div>
   );
 }

@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch: # 也支持手动触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Aliyun ECS
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /opt/my-site
+            git pull origin master
+            docker compose -f docker-compose.yml -f deploy/docker-compose.prod.yml up -d --build
+            docker exec my-site-backend-1 alembic upgrade head
+            echo "✅ Deploy done at $(date)"

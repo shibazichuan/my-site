@@ -4,14 +4,17 @@ import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import App from './App'
 import ErrorBoundary from './components/ErrorBoundary'
+import { initTheme } from './store/themeStore'
 import './index.css'
+
+initTheme();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ErrorBoundary>
       <HelmetProvider>
         <BrowserRouter>
-          <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-gray-400">加载中...</div>}>
+          <Suspense fallback={<div className="flex items-center justify-center min-h-screen text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-950">加载中...</div>}>
             <App />
           </Suspense>
         </BrowserRouter>

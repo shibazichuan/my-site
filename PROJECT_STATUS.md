@@ -44,6 +44,7 @@
 | 🎨 优化 | SEO + PWA + ErrorBoundary + 代码分割 + 404 | ✅ |
 | 🚀 部署 | 阿里云 ECS + SSL + 域名 + 自动备份 | ✅ |
 | 🔒 安全 | 速率限制 + 安全响应头 + 端口收敛 + 上传限制 + Schema 约束 | ✅ |
+| 🌙 体验 | 深色模式 + Giscus 评论 + 容器自动重启 + CI/CD | ✅ |
 
 ## 📁 项目结构
 
@@ -85,11 +86,14 @@ my-site/
 
 ## ⏳ 待办
 
-- [ ] 改管理员邮箱
+- [ ] 改管理员邮箱（见 server-deploy.txt）
 - [ ] 9月前决定续费方案
-- [ ] 博客评论系统
-- [ ] CI/CD 自动部署
-- [ ] 深色模式
+- [ ] 配置 UptimeRobot 监控告警（见 server-deploy.txt）
+- [ ] 配置 Docker 镜像加速（见 server-deploy.txt）
+- [ ] 配置 Giscus repoId/categoryId（仓库开启 Discussions 后）
+- [ ] 配置 GitHub Actions Secrets（SSH_KEY 等，见 server-deploy.txt）
+- [ ] 博客内容填充（写 2-3 篇技术文章）
+- [ ] 服务页文案优化
 
 ## 🔒 安全加固（2026-06-18）
 
@@ -101,10 +105,17 @@ my-site/
 | 上传限制 | 分块读取 + 10MB 上限 + 文件类型白名单 | ✅ |
 | Schema 约束 | 所有字符串字段 max_length + 密码 min_length=8 | ✅ |
 
-> ⚠️ 代码已修改，待部署到服务器（执行 server-deploy.txt）
+## 🌙 体验优化（2026-06-18）
+
+| 项目 | 措施 | 状态 |
+|------|------|:--:|
+| 深色模式 | TailwindCSS class dark mode + Zustand 持久化 + Navbar toggle | ✅ |
+| 评论系统 | Giscus（GitHub Discussions），待配置 repoId | ✅ |
+| 自动重启 | 所有容器 restart: unless-stopped | ✅ |
+| CI/CD | GitHub Actions → SSH → 自动部署，待配置 Secrets | ✅ |
 
 ## 📊 提交统计
 
-- 总提交: 51
+- 总提交: 52
 - 分支: master
 - 远程: github.com/shibazichuan/my-site

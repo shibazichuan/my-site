@@ -5,7 +5,7 @@ import TagBadge from './TagBadge';
 export default function PostCard({ post }: { post: PostListItem }) {
   const date = post.published_at ? new Date(post.published_at).toLocaleDateString('zh-CN') : '';
   return (
-    <article className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+    <article className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow">
       {post.cover_image && (
         <Link to={`/blog/${post.slug}`}>
           <img src={post.cover_image} alt={post.title} className="w-full h-40 object-cover" />
@@ -13,9 +13,9 @@ export default function PostCard({ post }: { post: PostListItem }) {
       )}
       <div className="p-4">
         <Link to={`/blog/${post.slug}`}>
-          <h3 className="font-semibold text-gray-900 hover:text-blue-600 mb-1 line-clamp-2">{post.title}</h3>
+          <h3 className="font-semibold text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 mb-1 line-clamp-2">{post.title}</h3>
         </Link>
-        {post.summary && <p className="text-sm text-gray-500 mb-2 line-clamp-2">{post.summary}</p>}
+        {post.summary && <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 line-clamp-2">{post.summary}</p>}
         <div className="flex items-center gap-2 flex-wrap mb-2">
           {post.tags.map((t) => <TagBadge key={t.slug} name={t.name} slug={t.slug} />)}
         </div>

@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
+    <script>
+      // Prevent FOUC: apply dark mode before page renders
+      (function() {
+        try {
+          var stored = localStorage.getItem('theme-preference');
+          if (stored && JSON.parse(stored).state.theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>知讯图 - 全栈开发者</title>
@@ -9,7 +20,7 @@
     <meta name="theme-color" content="#3b82f6" />
     <script defer src="/umami/script.js" data-website-id="0ed5deb0-d227-48f1-ad1b-4f8dddadabd5"></script>
   </head>
-  <body class="bg-gray-50 text-gray-900 min-h-screen">
+  <body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 min-h-screen">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
